@@ -246,8 +246,9 @@ public class Go {
 			if (!filePath.exists()) {
 				filePath.mkdirs();
 			}
-			if (Process.info!=null && !Process.info.username.isEmpty()) {
-				File fileName = new File(MD5(Info.LoginId) + "/" + Process.info.username);
+			if (Process.info != null && !Process.info.username.isEmpty()) {
+				File fileName = new File(MD5(Info.LoginId) + "/"
+						+ Process.info.username);
 				if (!fileName.exists()) {
 					fileName.createNewFile();
 				}

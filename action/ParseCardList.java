@@ -55,5 +55,5 @@ public class ParseCardList {
 			if (cardCount > Info.cardFull)
 				Process.AddUrgentTask(Info.EventType.cardFull);
 		}
-	}	
+	}
 }

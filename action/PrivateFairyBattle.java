@@ -2,8 +2,9 @@ package action;
 
 //import info.FairyBattleInfo;
 
-import java.util.ArrayList;
+import info.FairyBattleInfo;
 
+import java.util.ArrayList;
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathFactory;
@@ -102,8 +103,12 @@ public class PrivateFairyBattle {
 						"/response/header/error/message", doc);
 				return false;
 			}
-			if (Process.info.LatestFairyList.size() > 1000)
-				Process.info.LatestFairyList.poll();
+			for (FairyBattleInfo lfi : Process.info.LatestFairyList) {
+				if (!Process.info.currentAliveFairySerialId
+						.contains(lfi.SerialId)) {
+					Process.info.LatestFairyList.remove(lfi);
+				}
+			}
 			Process.info.LatestFairyList.offer(Process.info.pfairy);
 
 			if ((boolean) xpath.evaluate("count(//private_fairy_top) > 0", doc,
@@ -127,11 +132,6 @@ public class PrivateFairyBattle {
 			} else {
 				Process.info.gather = -1;
 			}
-
-			if (!Process.info.PrivateFairyList.isEmpty()) {
-				Process.AddUrgentTask(Info.EventType.fairyCanBattle);
-			}
-
 		} catch (Exception ex) {
 			Process.AddUrgentTask(Info.EventType.autoMedicine);
 			if (ErrorData.currentErrorType != ErrorData.ErrorType.none)

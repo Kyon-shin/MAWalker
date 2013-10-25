@@ -33,9 +33,13 @@ public class Think {
 			case FAIRY_DIANZAN:
 				return Action.FAIRY_DIANZAN;
 			case PRIVATE_FAIRY_BATTLE:
-				Process.info.pfairy = Process.info.PrivateFairyList.poll();
-				if (canBattle())
+				Process.info.pfairy = Process.info.PrivateFairyList.pop();
+				if (!Process.info.PrivateFairyList.isEmpty()) {
+					Process.AddUrgentTask(Info.EventType.fairyCanBattle);
+				}
+				if (canBattle()) {
 					return Action.PRIVATE_FAIRY_BATTLE;
+				}				
 				break;
 			case EXPLORE:
 				if (canExplore())
@@ -67,7 +71,7 @@ public class Think {
 					return Action.REWARD_BOX;
 				break;
 			case GET_REWARDS:
-				if(!Process.info.rewardBoxList.isEmpty())
+				if (!Process.info.rewardBoxList.isEmpty())
 					return Action.GET_REWARDS;
 				break;
 			default:

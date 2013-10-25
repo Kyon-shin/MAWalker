@@ -5,7 +5,7 @@ import info.FairyDianzanInfo;
 import info.FairySelectUser;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
+import java.util.Stack;
 
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
@@ -162,7 +162,8 @@ public class GetFairyList {
 					"//fairy_select/fairy_event[put_down=1]/fairy", doc,
 					XPathConstants.NODESET);
 
-			Process.info.PrivateFairyList = new LinkedList<FairyBattleInfo>();
+			Process.info.PrivateFairyList = new Stack<FairyBattleInfo>();
+			Process.info.currentAliveFairySerialId = new ArrayList<String>();
 			for (int i = 0; i < fairy.getLength(); i++) {
 				Node f = fairy.item(i).getFirstChild();
 				FairyBattleInfo fbi = new FairyBattleInfo();
@@ -196,6 +197,7 @@ public class GetFairyList {
 					}
 					f = f.getNextSibling();
 				} while (f != null);
+				Process.info.currentAliveFairySerialId.add(fbi.SerialId);
 				long killFairyHpMax = 0;
 				boolean useKillFairyDeck = false;
 				switch (fbi.Type) {
@@ -227,12 +229,12 @@ public class GetFairyList {
 					}
 				}
 				if (!attack_flag || fbi.ForceKill)
-					Process.info.PrivateFairyList.offer(fbi);
+					Process.info.PrivateFairyList.push(fbi);
 				else if (Info.specUser
 						.contains(Process.info.FairySelectUserList
 								.get(fbi.UserId).userName)) {
 					fbi.ForceKill = true;
-					Process.info.PrivateFairyList.offer(fbi);
+					Process.info.PrivateFairyList.push(fbi);
 				}
 			}
 

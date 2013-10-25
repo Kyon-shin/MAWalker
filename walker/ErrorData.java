@@ -56,9 +56,9 @@ public class ErrorData {
 		GetCardDeckDataError, GetCardDeckDataParseError, GetCardDeckResponse,
 		// 更换卡组
 		ChangeCardDeckDataError, ChangeCardDeckDataParseError, ChangeCardDeckResponse,
-		//盒子界面
+		// 盒子界面
 		RewardBoxDataError, RewardBoxDataParseError, RewardBoxResponse,
-		//开盒子
+		// 开盒子
 		GetRewardsDataError, GetRewardsDataParseError, GetRewardsResponse
 	}
 

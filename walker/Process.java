@@ -65,9 +65,27 @@ public class Process {
 			try {
 				auto();
 			} catch (Exception ex) {
-				Go.log(ex.getMessage(), true);
-				Process.AddUrgentTask(Info.EventType.cookieOutOfDate);
-				Go.log("Restart", true);
+				boolean printed = false;
+				if (ex.getMessage() != null) {
+					Go.log("[System] " + ex.getMessage(), true);
+					printed = true;
+				}
+				if (ErrorData.text != null) {
+					Go.log("[User] " + ErrorData.text, true);
+					ErrorData.clear();
+					printed = true;
+				}
+				if (ErrorData.bytes != null) {
+					Go.log("[User] " + new String(ErrorData.bytes), true);
+					ErrorData.clear();
+					printed = true;
+				}
+				if (printed == false) {
+					Go.log("[System] Unexpected Error:", true);
+					ex.printStackTrace();
+				}
+				Process.info.events.add(Info.EventType.cookieOutOfDate);
+				Go.log("[Global] Restart", true);
 			}
 		}
 	}
@@ -123,36 +141,43 @@ public class Process {
 
 	private void AddTimerTasks() {
 		TaskTimer.schedule(new TimerTask() {
+			@Override
 			public void run() {
 				AddTask(Info.EventType.getFairyList);
 			}
 		}, 0, 5 * 1000);// 5s
 		TaskTimer.schedule(new TimerTask() {
+			@Override
 			public void run() {
 				AddTask(Info.EventType.guildTop);
 			}
 		}, 0, 45 * 1000);// 45s
 		TaskTimer.schedule(new TimerTask() {
+			@Override
 			public void run() {
 				AddTask(Info.EventType.autoExplore);
 			}
 		}, 0, 30 * 1000);// 30s
 		TaskTimer.schedule(new TimerTask() {
+			@Override
 			public void run() {
 				AddTask(Info.EventType.needFloorInfo);
 			}
 		}, 0, 5 * 60 * 1000);// 5min
 		TaskTimer.schedule(new TimerTask() {
+			@Override
 			public void run() {
 				AddTask(Info.EventType.needAPBCInfo);
 			}
 		}, 0, 5 * 60 * 1000);// 5min
 		TaskTimer.schedule(new TimerTask() {
+			@Override
 			public void run() {
 				AddTask(Info.EventType.autoMedicine);
 			}
 		}, 0, 5 * 60 * 1000); // 5min
 		TaskTimer.schedule(new TimerTask() {
+			@Override
 			public void run() {
 				AddTask(Info.EventType.rewardBox);
 			}
@@ -166,6 +191,7 @@ public class Process {
 		myCal.set(Calendar.MINUTE, 0);
 		myCal.set(Calendar.SECOND, 0);
 		TaskTimer.schedule(new TimerTask() {
+			@Override
 			public void run() {
 				AddUrgentTask(Info.EventType.notLoggedIn);
 			}

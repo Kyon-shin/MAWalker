@@ -107,26 +107,26 @@ public class GetFloorInfo {
 				getFloor(tmpArea);
 			}
 
-			for (Floor tmpFloor : Process.info.allFloors) {
-				if (Process.info.front == null) {
-					Process.info.front = tmpFloor;
-				} else {
-					if (Integer.parseInt(Process.info.front.areaId) < Integer
-							.parseInt(tmpFloor.areaId)) {
+			if (Process.info.allFloors.isEmpty()) {
+				Process.info.front = Process.info.floor.get(1);
+				Process.info.AllClear = true;
+			} else {
+				Process.info.AllClear = false;
+				for (Floor tmpFloor : Process.info.allFloors) {
+					if (Process.info.front == null) {
 						Process.info.front = tmpFloor;
-					} else if (Process.info.front.equals(tmpFloor.areaId)) {
-						if (Integer.parseInt(Process.info.front.floorId) < Integer
-								.parseInt(tmpFloor.floorId)) {
+					} else {
+						if (Integer.parseInt(Process.info.front.areaId) < Integer
+								.parseInt(tmpFloor.areaId)) {
 							Process.info.front = tmpFloor;
+						} else if (Process.info.front.equals(tmpFloor.areaId)) {
+							if (Integer.parseInt(Process.info.front.floorId) < Integer
+									.parseInt(tmpFloor.floorId)) {
+								Process.info.front = tmpFloor;
+							}
 						}
 					}
 				}
-			}
-
-			Process.info.AllClear = true;
-			if (Process.info.area.get(Integer
-					.parseInt(Process.info.front.areaId)).exploreProgress != 100) {
-				Process.info.AllClear = false;
 			}
 		} catch (Exception ex) {
 			if (ErrorData.currentErrorType == ErrorData.ErrorType.none) {

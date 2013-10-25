@@ -195,9 +195,10 @@ public class Info {
 	public GuildFairyBattleForce gfbforce;
 	public boolean NoFairy = false;
 	public Queue<FairyBattleInfo> LatestFairyList = new LinkedList<FairyBattleInfo>();
-	public Queue<FairyBattleInfo> PrivateFairyList = new LinkedList<FairyBattleInfo>();
+	public Stack<FairyBattleInfo> PrivateFairyList = new Stack<FairyBattleInfo>();
 	public Stack<FairyDianzanInfo> FairyDianzanList = new Stack<FairyDianzanInfo>();
 	public Hashtable<String, FairySelectUser> FairySelectUserList;
+	public ArrayList<String> currentAliveFairySerialId = new ArrayList<String>();
 
 	// user
 	public static ArrayList<String> specUser = new ArrayList<String>();
@@ -208,7 +209,7 @@ public class Info {
 	public String ExploreGold = "";
 	public String ExploreExp = "";
 	public String AreaProgress = "";
-	
+
 	// reward box
 	public String rewardBoxList = "";
 
@@ -235,8 +236,9 @@ public class Info {
 		floor = new Hashtable<Integer, Floor>();
 		allFloors = new ArrayList<Floor>();
 		front = new Floor();
-		PrivateFairyList = new LinkedList<FairyBattleInfo>();
+		PrivateFairyList = new Stack<FairyBattleInfo>();
 		FairyDianzanList = new Stack<FairyDianzanInfo>();
+		currentAliveFairySerialId = new ArrayList<String>();
 		events = new Stack<EventType>();
 		events.push(EventType.cookieLogin);
 		KeepCard = new ArrayList<String>();
