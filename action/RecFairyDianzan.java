@@ -100,6 +100,7 @@ public class RecFairyDianzan {
 				walker.Go.log(bc_result, true);
 			}
 		} catch (Exception ex) {
+			Process.exceptionDisplay(ex);
 			if (ErrorData.currentErrorType != ErrorData.ErrorType.none)
 				throw ex;
 			ErrorData.currentDataType = ErrorData.DataType.bytes;

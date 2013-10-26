@@ -39,7 +39,7 @@ public class Think {
 				}
 				if (canBattle()) {
 					return Action.PRIVATE_FAIRY_BATTLE;
-				}				
+				}
 				break;
 			case EXPLORE:
 				if (canExplore())
@@ -291,7 +291,7 @@ public class Think {
 			else
 				return false;
 		} catch (Exception ex) {
-			ex.printStackTrace();
+			Process.exceptionDisplay(ex);
 			return false;
 		}
 	}

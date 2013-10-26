@@ -77,6 +77,7 @@ public class SellCard {
 			}
 
 		} catch (Exception ex) {
+			Process.exceptionDisplay(ex);
 			if (ErrorData.currentErrorType != ErrorData.ErrorType.none)
 				throw ex;
 			ErrorData.currentDataType = ErrorData.DataType.bytes;

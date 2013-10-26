@@ -3,6 +3,8 @@ package walker;
 import info.GuildFairyBattleForce;
 
 import java.io.ByteArrayInputStream;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -82,7 +84,7 @@ public class Process {
 				}
 				if (printed == false) {
 					Go.log("[System] Unexpected Error:", true);
-					ex.printStackTrace();
+					Process.exceptionDisplay(ex);
 				}
 				Process.info.events.add(Info.EventType.cookieOutOfDate);
 				Go.log("[Global] Restart", true);
@@ -218,6 +220,19 @@ public class Process {
 					Info.Debug);
 			return false;
 		}
+	}
+
+	public static void exceptionDisplay(Exception ex) {
+		String exceptionInfo = "";
+		try {
+			StringWriter sw = new StringWriter();
+			PrintWriter pw = new PrintWriter(sw);
+			ex.printStackTrace(pw);
+			exceptionInfo = sw.toString();
+		} catch (Exception e2) {
+			exceptionInfo = "bad getErrorInfoFromException";
+		}
+		Go.log(exceptionInfo, true);
 	}
 
 	private void rescue() {

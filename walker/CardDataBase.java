@@ -16,7 +16,7 @@ public class CardDataBase {
 		try {
 			init();
 		} catch (Exception e) {
-			e.printStackTrace();
+			Process.exceptionDisplay(e);
 		}
 	}
 
@@ -49,7 +49,7 @@ public class CardDataBase {
 			if (conn != null)
 				conn.close();
 		} catch (SQLException e) {
-			e.printStackTrace();
+			Process.exceptionDisplay(e);
 		}
 		return tmpCard;
 
@@ -59,7 +59,7 @@ public class CardDataBase {
 		try {
 			Class.forName("org.sqlite.JDBC");
 		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
+			Process.exceptionDisplay(e);
 		}
 	}
 

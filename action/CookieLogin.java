@@ -71,10 +71,10 @@ public class CookieLogin {
 			result = Process.network.ConnectToServer(URL_MAINMENU,
 					new ArrayList<NameValuePair>(), true);
 		} catch (Exception ex) {
+			Process.exceptionDisplay(ex);
 			ErrorData.currentDataType = ErrorData.DataType.text;
 			ErrorData.currentErrorType = ErrorData.ErrorType.ConnectionError;
 			ErrorData.text = ex.getMessage();
-			ex.printStackTrace();
 			throw ex;
 		}
 
@@ -133,6 +133,7 @@ public class CookieLogin {
 					"//your_data/max_card_num", doc));
 
 		} catch (Exception ex) {
+			Process.exceptionDisplay(ex);
 			if (ErrorData.currentErrorType != ErrorData.ErrorType.none)
 				throw ex;
 			ErrorData.currentDataType = ErrorData.DataType.bytes;

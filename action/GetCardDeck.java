@@ -97,6 +97,7 @@ public class GetCardDeck {
 			walker.Go.saveDeck(2, Info.MyDeck2.card);
 
 		} catch (Exception ex) {
+			Process.exceptionDisplay(ex);
 			if (ErrorData.currentErrorType != ErrorData.ErrorType.none)
 				throw ex;
 			ErrorData.currentDataType = ErrorData.DataType.bytes;

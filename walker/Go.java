@@ -145,7 +145,7 @@ public class Go {
 				writer.close();
 			}
 		} catch (IOException ex) {
-			ex.printStackTrace();
+			Process.exceptionDisplay(ex);
 		}
 	}
 
@@ -191,8 +191,7 @@ public class Go {
 			StreamResult result = new StreamResult(new File(configFile));
 			transformer.transform(source, result);
 		} catch (Exception e) {
-			e.printStackTrace();
-			System.out.println(e.getMessage());
+			Process.exceptionDisplay(e);
 		}
 	}
 
@@ -217,8 +216,7 @@ public class Go {
 			StreamResult result = new StreamResult(new File(configFile));
 			transformer.transform(source, result);
 		} catch (Exception e) {
-			e.printStackTrace();
-			System.out.println(e.getMessage());
+			Process.exceptionDisplay(e);
 		}
 	}
 
@@ -235,8 +233,7 @@ public class Go {
 				outputFileStream.close();
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
-			System.out.println(e.getMessage());
+			Process.exceptionDisplay(e);
 		}
 	}
 
@@ -255,7 +252,7 @@ public class Go {
 			}
 			return true;
 		} catch (Exception e) {
-			e.printStackTrace();
+			Process.exceptionDisplay(e);
 			return false;
 		}
 
@@ -269,7 +266,7 @@ public class Go {
 			}
 			return true;
 		} catch (Exception e) {
-			e.printStackTrace();
+			Process.exceptionDisplay(e);
 			return false;
 		}
 
@@ -283,7 +280,7 @@ public class Go {
 				wwb = Workbook.createWorkbook(new File(MD5(Info.LoginId) + "/"
 						+ myCardDatafile));
 			} catch (IOException e) {
-				e.printStackTrace();
+				Process.exceptionDisplay(e);
 			}
 			if (wwb != null) {
 				WritableSheet ws = wwb.createSheet("My cards", 0);
@@ -304,9 +301,9 @@ public class Go {
 						try {
 							ws.addCell(labelC);
 						} catch (RowsExceededException e) {
-							e.printStackTrace();
+							Process.exceptionDisplay(e);
 						} catch (WriteException e) {
-							e.printStackTrace();
+							Process.exceptionDisplay(e);
 						}
 					}
 				}
@@ -314,9 +311,9 @@ public class Go {
 					wwb.write();
 					wwb.close();
 				} catch (IOException e) {
-					e.printStackTrace();
+					Process.exceptionDisplay(e);
 				} catch (WriteException e) {
-					e.printStackTrace();
+					Process.exceptionDisplay(e);
 				}
 			}
 		}
@@ -356,12 +353,11 @@ public class Go {
 				str[k++] = md5String[byte0 >>> 4 & 0xf]; // 5
 				str[k++] = md5String[byte0 & 0xf]; // F
 			}
-
 			// 返回经过加密后的字符串
 			return new String(str);
 
 		} catch (Exception e) {
-			e.printStackTrace();
+			Process.exceptionDisplay(e);
 			return null;
 		}
 	}

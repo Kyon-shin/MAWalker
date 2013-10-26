@@ -103,11 +103,15 @@ public class PrivateFairyBattle {
 						"/response/header/error/message", doc);
 				return false;
 			}
+			ArrayList<FairyBattleInfo> tmpDeadFairyList = new ArrayList<FairyBattleInfo>();
 			for (FairyBattleInfo lfi : Process.info.LatestFairyList) {
 				if (!Process.info.currentAliveFairySerialId
 						.contains(lfi.SerialId)) {
-					Process.info.LatestFairyList.remove(lfi);
+					tmpDeadFairyList.add(lfi);
 				}
+			}
+			for (FairyBattleInfo lfi : tmpDeadFairyList) {
+					Process.info.LatestFairyList.remove(lfi);
 			}
 			Process.info.LatestFairyList.offer(Process.info.pfairy);
 
@@ -133,7 +137,7 @@ public class PrivateFairyBattle {
 				Process.info.gather = -1;
 			}
 		} catch (Exception ex) {
-			Process.AddUrgentTask(Info.EventType.autoMedicine);
+			Process.exceptionDisplay(ex);
 			if (ErrorData.currentErrorType != ErrorData.ErrorType.none)
 				throw ex;
 			ErrorData.currentDataType = ErrorData.DataType.bytes;

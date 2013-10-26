@@ -129,6 +129,7 @@ public class GetFloorInfo {
 				}
 			}
 		} catch (Exception ex) {
+			Process.exceptionDisplay(ex);
 			if (ErrorData.currentErrorType == ErrorData.ErrorType.none) {
 				throw ex;
 			}

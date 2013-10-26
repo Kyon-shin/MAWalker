@@ -39,7 +39,7 @@ public class GetConfig {
 				try {
 					Info.CanNotBeSold.add(idx.getFirstChild().getNodeValue());
 				} catch (Exception ex) {
-					ex.printStackTrace();
+					Process.exceptionDisplay(ex);
 				}
 			}
 			NodeList idl2 = (NodeList) xpath.evaluate("/config/user/name", doc,
@@ -50,7 +50,7 @@ public class GetConfig {
 				try {
 					Info.specUser.add(idx2.getFirstChild().getNodeValue());
 				} catch (Exception ex) {
-					ex.printStackTrace();
+					Process.exceptionDisplay(ex);
 				}
 			}
 			String tmp = xpath.evaluate("/config/sell_card/policy", doc);

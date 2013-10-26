@@ -70,9 +70,6 @@ public class Explore {
 		try {
 			String code = xpath.evaluate("/response/header/error/code", doc);
 			if (!code.equals("0")) {
-				if (code.equals("8000")) {
-					Process.AddUrgentTask(Info.EventType.cardFull);
-				}
 				ErrorData.currentErrorType = ErrorData.ErrorType.ExploreResponse;
 				ErrorData.currentDataType = ErrorData.DataType.text;
 				ErrorData.text = xpath.evaluate(
@@ -161,7 +158,7 @@ public class Explore {
 			}
 
 		} catch (Exception ex) {
-			Process.AddUrgentTask(Info.EventType.autoMedicine);
+			Process.exceptionDisplay(ex);
 			if (ErrorData.currentErrorType != ErrorData.ErrorType.none)
 				throw ex;
 			ErrorData.currentDataType = ErrorData.DataType.bytes;

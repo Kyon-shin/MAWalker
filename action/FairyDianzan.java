@@ -106,6 +106,7 @@ public class FairyDianzan {
 				fairy_dianzan(fairy.SerialId, attacker_userid_list);
 
 			} catch (Exception ex) {
+				Process.exceptionDisplay(ex);
 				if (ErrorData.currentErrorType != ErrorData.ErrorType.none)
 					throw ex;
 				ErrorData.currentDataType = ErrorData.DataType.bytes;
@@ -191,6 +192,7 @@ public class FairyDianzan {
 			}
 
 		} catch (Exception ex) {
+			Process.exceptionDisplay(ex);
 			if (ErrorData.currentErrorType != ErrorData.ErrorType.none)
 				throw ex;
 			ErrorData.currentDataType = ErrorData.DataType.bytes;
